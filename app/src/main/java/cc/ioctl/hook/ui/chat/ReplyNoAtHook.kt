@@ -63,6 +63,7 @@ object ReplyNoAtHook : CommonSwitchFunctionHook(), DexKitFinder {
         if (QAppUtils.isQQnt()) {
             if (requireMinQQVersion(QQVersion.QQ_9_0_30)) {
                 // AIOMsgItem -> getMsgRecord() -> set anonymousExtInfo
+                val method = DexKit.requireMethodFromCache(Reply_At_QQNT_9_0_30)
                 hookBeforeIfEnabled(method) { param ->
                     val msgIntent = param.args[0]
                     val msgRecord = XposedHelpers.callMethod(msg, "getMsgRecord")
